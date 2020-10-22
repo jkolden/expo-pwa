@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expo-deployment
+spec:
+  selector:
+    matchLabels:
+      app: expo-pwa
+  replicas: 1 # deployment runs 1 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: expo-pwa
+    spec:
+      containers:
+        - name: expo-pwa
+          image: jkolden/expo-pwa:latest
+          ports:
+            - containerPort: 19006 #Endpoint is at port 19006 in the container
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: expo-service
+spec:
+  type: NodePort #Exposes the service as a node port
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 19006
+  selector:
+    app: expo-pwa
