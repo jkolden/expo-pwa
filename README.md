@@ -1,1 +1,1 @@
-# This is a sample Expo project using react native
+## This is a sample Expo project using react native
