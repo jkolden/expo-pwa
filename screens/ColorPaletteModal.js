@@ -251,7 +251,7 @@ const ColorPaletteModal = ({ navigation }) => {
         keyExtractor={(item) => item.colorName}
         renderItem={({ item }) => (
           <View style={styles.color}>
-            <Text>{item.colorName}</Text>
+            <Text style={styles.text}>{item.colorName}</Text>
             <View
               style={[{ backgroundColor: item.hexCode }, styles.box]}
             ></View>
@@ -320,12 +320,15 @@ const styles = StyleSheet.create({
   box: {
     height: 30,
     width: 30,
-    marginRight: 5,
+    marginRight: 50,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 1,
     elevation: 10,
+  },
+  text: {
+    flexGrow: 1,
   },
 });
 
