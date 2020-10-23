@@ -272,10 +272,10 @@ const ColorPaletteModal = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Submit</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={_pickImage}>
+      {/*<TouchableOpacity style={styles.button} onPress={_pickImage}>
         <Text style={styles.buttonText}>Add Image</Text>
       </TouchableOpacity>
-      {image && <Image source={{ uri: image }} style={styles.image} />}
+      {image && <Image source={{ uri: image }} style={styles.image} />} */}
     </View>
   );
 };

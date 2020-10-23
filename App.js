@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import BottomNav from "./navigation/BottomNav";
+import MainTabScreen from "./screens/MainTabScreen";
 import Home from "./screens/Home";
 import ColorPalette from "./screens/ColorPalette";
 import ColorPaletteModal from "./screens/ColorPaletteModal";
@@ -32,7 +32,7 @@ const App = () => {
         <RootStack.Navigator mode="modal">
           <RootStack.Screen
             name="Main"
-            component={MainStackScreen}
+            component={MainTabScreen}
             options={{ headerShown: false }}
           />
           <RootStack.Screen
