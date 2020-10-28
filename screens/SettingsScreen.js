@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 const SettingsScreen = ({ route }) => {
   return (
     <View style={styles.container}>
-      <Text>Settings Screen</Text>
+      <Text>{JSON.stringify(route)}</Text>
     </View>
   );
 };

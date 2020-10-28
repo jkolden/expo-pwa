@@ -1,10 +1,11 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/Ionicons";
 
 import { View, Text, SafeAreaView, StyleSheet, FlatList } from "react-native";
+import { Avatar, Badge } from "react-native-elements";
+
 import ProfileScreen from "./ProfileScreen";
 import SettingsScreen from "./SettingsScreen";
 import AnalyticsScreen from "./AnalyticsScreen";
@@ -14,12 +15,18 @@ import Home from "./Home";
 import ColorPalette from "./ColorPalette";
 import ColorPaletteModal from "./ColorPaletteModal";
 
+import { createDrawerNavigator } from "@react-navigation/drawer";
+
+const Drawer = createDrawerNavigator();
+
 const MainStack = createStackNavigator();
+const HomeStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 
 const MainTabScreen = () => (
   <Tab.Navigator
+    name="MainTabs"
     initialRouteName="Home"
     activeColor="#fff"
     style={{ backgroundColor: "tomato" }}
@@ -42,7 +49,7 @@ const MainTabScreen = () => (
         tabBarLabel: "Analytics",
         tabBarColor: "#d02860",
         tabBarIcon: ({ color }) => (
-          <Icon name="ios-analytics" color={color} size={26} />
+          <Icon name="ios-trending-up" color={color} size={26} />
         ),
       }}
     />
@@ -53,7 +60,7 @@ const MainTabScreen = () => (
         tabBarLabel: "Settings",
         tabBarColor: "rebeccapurple",
         tabBarIcon: ({ color }) => (
-          <Icon name="ios-cog" color={color} size={26} />
+          <Icon name="ios-build" color={color} size={26} />
         ),
       }}
     />
@@ -76,13 +83,52 @@ export default MainTabScreen;
 const MainStackScreen = () => {
   return (
     <MainStack.Navigator>
-      <MainStack.Screen name="Home" component={Home} />
+      <MainStack.Screen
+        name="MainStack"
+        component={HomeStackScreen}
+        options={{ headerShown: false, title: "Home" }}
+      />
       <MainStack.Screen
         name="ColorPalette"
         component={ColorPalette}
         options={({ route }) => ({ title: route.params.paletteName })}
       />
     </MainStack.Navigator>
+  );
+};
+
+const HomeStackScreen = ({ navigation }) => {
+  return (
+    <HomeStack.Navigator mode="modal">
+      <HomeStack.Screen
+        name="Main"
+        component={Home}
+        options={{
+          title: "Home",
+          headerRight: () => (
+            <View style={styles.avatar}>
+              <Avatar rounded title="JD" activeOpacity={0.7} />
+            </View>
+          ),
+          headerLeft: () => (
+            <Icon.Button
+              name="ios-menu"
+              size={25}
+              backgroundColor="#fff"
+              color="#000"
+              onPress={() => {
+                navigation.toggleDrawer();
+              }}
+            />
+          ),
+        }}
+      />
+      <HomeStack.Screen
+        name="ColorPaletteModal"
+        component={ColorPaletteModal}
+        options={{ title: "Palette Entry" }}
+      />
+    </HomeStack.Navigator>
   );
 };
 
@@ -118,5 +164,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
+  },
+  avatar: {
+    margin: 5,
   },
 });

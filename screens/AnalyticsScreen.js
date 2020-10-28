@@ -1,10 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 
 const AnalyticsScreen = ({ route }) => {
   return (
     <View style={styles.container}>
-      <Text>Analytics Screen</Text>
+      <Text>Costs by Month</Text>
     </View>
   );
 };
@@ -12,6 +12,7 @@ const AnalyticsScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 5,
     alignItems: "center",
     justifyContent: "center",
   },

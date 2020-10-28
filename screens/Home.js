@@ -43,6 +43,7 @@ const Home = ({ navigation, route }) => {
 
   return (
     <View>
+      {/**<Text style={styles.buttonText}>{JSON.stringify(route.params)}</Text> */}
       <FlatList
         style={styles.list}
         data={colors}
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
+  text: { color: "#000" },
 });
 
 export default Home;

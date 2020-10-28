@@ -166,47 +166,7 @@ const COLORS = [
 
 const ColorPaletteModal = ({ navigation }) => {
   const [name, setName] = useState();
-  const [image, setImage] = useState();
   const [selectedColors, setSelectedColors] = useState([]);
-
-  const _pickImage = async () => {
-    try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-      if (!result.cancelled) {
-        setImage(result.uri);
-      }
-
-      console.log(result);
-    } catch (E) {
-      console.log(E);
-    }
-  };
-
-  const loadImage = () => {
-    let strImage = image?.replace(/^data:image\/[a-z]+;base64,/, "");
-
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    let payload = JSON.stringify({ img: strImage });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: payload,
-      redirect: "follow",
-    };
-
-    fetch(
-      "http://192.168.1.106/api/google-image",
-      requestOptions
-    ).then((data) => console.log(data));
-  };
 
   const handleSubmit = useCallback(() => {
     if (!name) {
@@ -218,7 +178,8 @@ const ColorPaletteModal = ({ navigation }) => {
         paletteName: name,
         colors: selectedColors,
       };
-      navigation.navigate("Home", { newColorPalette });
+      //navigation.navigate("Home", { newColorPalette });
+      navigation.navigate("Main", { newColorPalette });
     }
   }, [name, selectedColors]);
 
@@ -233,10 +194,6 @@ const ColorPaletteModal = ({ navigation }) => {
       );
     }
   });
-
-  const handleSubmit1 = useCallback(() => {
-    loadImage();
-  }, [image]);
 
   return (
     <View style={styles.container}>
